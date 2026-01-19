@@ -1,0 +1,81 @@
+####################################
+# Maven / Build
+####################################
+target/
+!**/src/main/**/target/
+!**/src/test/**/target/
+
+####################################
+# Java
+####################################
+*.class
+*.log
+
+####################################
+# Spring Boot
+####################################
+HELP.md
+
+####################################
+# IDEs
+####################################
+
+# Eclipse / STS
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings/
+.springBeans
+.sts4-cache/
+
+# IntelliJ IDEA
+.idea/
+*.iws
+*.iml
+*.ipr
+
+# VS Code
+.vscode/
+
+# NetBeans
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+build/
+!**/src/main/**/build/
+!**/src/test/**/build/
+
+####################################
+# OS
+####################################
+.DS_Store
+Thumbs.db
+
+####################################
+# Environment & Secrets (CRITICAL)
+####################################
+application.properties
+application.yml
+application-*.properties
+application-*.yml
+
+####################################
+# OAuth / Credentials
+####################################
+client_secret_*.json
+*.pem
+*.key
+
+####################################
+# Logs
+####################################
+logs/
+*.log
+
+####################################
+# Maven Wrapper (keep)
+####################################
+.mvn/wrapper/maven-wrapper.jar

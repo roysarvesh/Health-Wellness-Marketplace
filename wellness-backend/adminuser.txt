@@ -1,0 +1,4 @@
+{
+  "email": "admin@wellness.com",
+  "password": "admin123"
+}

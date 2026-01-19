@@ -1,0 +1,84 @@
+Login:
+#using this 
+{
+  "email": "rahul.patient@example.com",
+  "password": "Patient@123"
+}
+
+{
+  "email": "admin@wellness.com",
+  "password": "admin123"
+}
+
+{
+  "email": "john@example.com",
+  "password": "password123"
+}
+
+{
+  "email": "aarav.patient@example.com",
+  "password": "Password@123"
+}
+Register:
+{
+  "name": "Dr. John Doe",
+  "email": "john@example.com",
+  "password": "password123",
+  "role": "PRACTITIONER",
+  "bio": "Ayurveda Expert",
+  "specialization": "Ayurveda"
+}
+
+{
+    "name": "Dr. Drake Ramoray",
+    "email": "drake10@gmail..com",
+    "password": "StrongPassword@123",
+    "role": "PRACTITIONER",
+  "specialization": "Mental Health Counselor",
+  "verified": true,
+  "latitude": 28.6200,
+  "longitude": 77.2000,
+  "city": "Delhi",
+  "address": "Karol Bagh, Delhi",
+  "rating": 4.8
+}
+
+
+{
+  "name": "Aarav Sharma",
+  "email": "aarav.patient@example.com",
+  "password": "Password@123",
+  "role": "PATIENT"
+}
+{
+  "name": "System Admin",
+  "email": "admin@wellness.com",
+  "password": "Admin@123",
+  "role": "ADMIN"
+}
+{
+  "name": "Rahul Sharma",
+  "email": "rahul.patient@example.com",
+  "password": "Patient@123",
+  "role": "PATIENT",
+  "bio": "Patient seeking therapy for stress and anxiety"
+}
+
+{
+  "name": "Dr. Ananya Verma",
+  "email": "ananya.verma@wellness.com",
+  "bio": "Licensed therapist with experience in mental health counseling",
+  "rating": 4.5,
+  "verified": false,
+  "role": "PRACTITIONER"
+}
+
+
+{
+  "name": "Neha Kapoor",
+  "email": "neha.patient@example.com",
+  "password": "Patient@123",
+  "role": "PATIENT",
+  "bio": "Patient looking for guided therapy to manage work-related stress and improve emotional well-being."
+}
+
