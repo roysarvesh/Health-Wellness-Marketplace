@@ -5,6 +5,8 @@ import com.wellness.backend.service.UserService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
+
+import com.wellness.backend.dto.UpdateUserRequest;
 import com.wellness.backend.dto.UserProfileResponse;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -20,7 +22,15 @@ public class UserController {
         String email = userDetails.getUsername();
         return ResponseEntity.ok(userService.getUserProfileByEmail(email));
     }
-
+    @PutMapping("/me")
+    public ResponseEntity<UserProfileResponse> updateMyProfile(
+            @AuthenticationPrincipal CustomUserDetails userDetails,
+            @RequestBody UpdateUserRequest request
+    ) {
+        Long userId = userDetails.getUser().getId();
+        UserProfileResponse updated = userService.updateUser(userId, request);
+        return ResponseEntity.ok(updated);
+    }
     // get other user's profile (admin or owner; add checks later)
     @GetMapping("/{id}")
     public ResponseEntity<UserProfileResponse> getById(@PathVariable Long id) {

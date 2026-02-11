@@ -60,6 +60,9 @@ public class SecurityConfig {
                 .requestMatchers("/api/admin/**").hasRole("ADMIN")
                 .requestMatchers("/api/forum/**").authenticated()
                 .requestMatchers("/api/orders/**").authenticated()
+                .requestMatchers("/api/chat/send").authenticated()
+                .requestMatchers("/api/chat/history/**").authenticated()
+                .requestMatchers("/ws/**").permitAll()
                 .anyRequest().authenticated()
             )
 

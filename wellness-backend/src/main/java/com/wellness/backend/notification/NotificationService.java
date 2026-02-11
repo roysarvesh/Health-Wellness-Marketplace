@@ -28,7 +28,11 @@ public class NotificationService {
         this.messagingTemplate = messagingTemplate;
     }
 
-
+    /*
+     * -------------------------------
+     *   SYSTEM / GENERAL NOTIFY
+     * -------------------------------
+     */
     public void notify(Long userId, String type, String message) {
 
         Notification n = new Notification();
@@ -42,7 +46,7 @@ public class NotificationService {
 
         messagingTemplate.convertAndSend(
                 "/topic/notifications/" + userId,
-                message
+                n
         );
     }
 
@@ -50,7 +54,34 @@ public class NotificationService {
         notify(userId, "SYSTEM", message);
     }
 
+    /*
+     * -------------------------------
+     *   NEW — CHAT MESSAGE NOTIFY
+     * -------------------------------
+     */
+    public void notifyChatMessage(Long receiverId, Long senderId, String content) {
 
+        Notification n = new Notification();
+        n.setUserId(receiverId);
+        n.setType("CHAT");
+        n.setMessage("New message from User " + senderId + ": " + content);
+        n.setRead(false);
+        n.setCreatedAt(LocalDateTime.now());
+
+        repo.save(n);
+
+        // 🔔 Real-time WebSocket push
+        messagingTemplate.convertAndSend(
+                "/topic/notifications/" + receiverId,
+                n
+        );
+    }
+
+    /*
+     * -------------------------------
+     *   FETCH NOTIFICATIONS
+     * -------------------------------
+     */
     public List<Notification> getUserNotifications(Long userId) {
         return repo.findByUserIdOrderByCreatedAtDesc(userId);
     }
@@ -59,7 +90,11 @@ public class NotificationService {
         return repo.countByUserIdAndIsReadFalse(userId);
     }
 
-
+    /*
+     * -------------------------------
+     *   MARK AS READ
+     * -------------------------------
+     */
     @Transactional
     public void markAsRead(Long notificationId, Long userId) {
 
@@ -76,7 +111,11 @@ public class NotificationService {
         }
     }
 
-
+    /*
+     * -------------------------------
+     *   ADMIN BROADCAST
+     * -------------------------------
+     */
     @Transactional
     public void broadcast(String message) {
 
@@ -95,7 +134,7 @@ public class NotificationService {
 
             messagingTemplate.convertAndSend(
                     "/topic/notifications/" + user.getId(),
-                    message
+                    n
             );
         }
     }

@@ -1,5 +1,6 @@
 package com.wellness.backend.service;
 
+import com.wellness.backend.dto.UpdateUserRequest;
 import com.wellness.backend.dto.UserProfileResponse;
 import com.wellness.backend.exception.ResourceNotFoundException;
 import com.wellness.backend.model.Role;
@@ -13,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.stream.Collectors;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class UserService {
@@ -50,6 +52,28 @@ public class UserService {
 
         return mapToProfileResponse(user);
     }
+ // -------------------------------------------------
+ // UPDATE USER PROFILE (PATIENT / PRACTITIONER)
+ // -------------------------------------------------
+ @Transactional
+ public UserProfileResponse updateUser(Long id, UpdateUserRequest request) {
+
+     User user = userRepository.findById(id)
+             .orElseThrow(() ->
+                     new ResourceNotFoundException("User not found with id: " + id));
+
+     if (request.getName() != null && !request.getName().isBlank()) {
+         user.setName(request.getName());
+     }
+
+     if (request.getBio() != null) {
+         user.setBio(request.getBio());
+     }
+
+     userRepository.save(user);
+
+     return mapToProfileResponse(user);
+ }
 
     // -------------------------------------------------
     // ADMIN: GET ALL USERS

@@ -25,14 +25,25 @@ export default function LoginPage() {
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState("");
 
+  /* =====================================================
+     UPDATED HANDLE SUBMIT (with role + userId storage)
+  ===================================================== */
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
 
     try {
       const res = await login(email, password);
+
+      // Store token
       setToken(res.token);
-      navigate("/");
+
+      // Store user meta
+      localStorage.setItem("role", res.role);
+      localStorage.setItem("userId", res.id);
+
+      // Redirect to Profile
+      navigate("/profile");
     } catch {
       setError("Invalid email or password");
     }
@@ -61,7 +72,7 @@ export default function LoginPage() {
               variant="h4"
               sx={{
                 fontWeight: 900,
-                color: "rgb(15 23 42)", // slate-900
+                color: "rgb(15 23 42)",
                 ".dark &": { color: "#ffffff" },
               }}
               className="tracking-tight mb-2"
